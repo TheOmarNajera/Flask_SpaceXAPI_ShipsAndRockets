@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space X API</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+</head>
+<body>
+    <h1>Consumiendo APISs de Space X</h1>
+
+
+    <h2>Rockets</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>País</th>
+                <th>Primer vuelo</th>
+                <th>Imágenes</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rocket in rockets %}
+            <tr>
+                <td>{{ rocket['name'] }}</td>
+                <td>{{ rocket['description'] }}</td>
+                <td>{{ rocket['country'] }}</td>
+                <td>{{ rocket['first_flight'] }}</td>
+                <td>
+                {% for image in rocket['flickr_images'] %}
+                    <img src="{{ image }}" alt="">
+                {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h2>Ships</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Legacy_id</th>
+                <th>Nombre</th>
+                <th>Link</th>
+                <th>Tipo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ship in ships %}
+            <tr>
+                <td>{{ ship['legacy_id'] }}</td>
+                <td>{{ ship['name'] }}</td>
+                <td><a href="{{ ship['link'] }}">{{ ship['link'] }}</a></td>
+                <td>{{ ship['type'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>
